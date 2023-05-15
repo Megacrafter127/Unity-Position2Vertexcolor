@@ -1,0 +1,9 @@
+{
+  "name": "m127.vertexcolorbaker",
+  "version": "1.0.0",
+  "type": "tool",
+  "unity": "2019.4",
+  "unityRelease": "31f1",
+  "displayName": "Vertexcolor Baker",
+  "description": "A simple vertex color baking utility."
+}

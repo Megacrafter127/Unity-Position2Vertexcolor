@@ -1,0 +1,15 @@
+{
+    "name": "m127.boundsapplier",
+    "references": [
+        "GUID:79ca36ed60c1b7046a6dc8eaabfd084c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

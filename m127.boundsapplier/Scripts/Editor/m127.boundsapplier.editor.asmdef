@@ -1,0 +1,17 @@
+{
+    "name": "m127.boundsapplier.editor",
+    "references": [
+        "GUID:955d69cad2e8cf146b780bc740371847"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
