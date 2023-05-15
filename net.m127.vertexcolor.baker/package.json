@@ -1,5 +1,5 @@
 {
-  "name": "m127.vertexcolorbaker",
+  "name": "net.m127.vertexcolor.baker",
   "author": {
     "name": "M127",
     "email": "Megacrafter127@web.de"
@@ -7,7 +7,6 @@
   "version": "1.0.0",
   "type": "tool",
   "unity": "2019.4",
-  "unityRelease": "31f1",
   "vpmDependencies": {},
   "displayName": "Vertexcolor Baker",
   "description": "A simple vertex color baking utility."
