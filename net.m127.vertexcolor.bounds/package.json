@@ -4,14 +4,16 @@
     "name": "M127",
     "email": "Megacrafter127@web.de"
   },
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "tool",
   "unity": "2019.4",
   "dependencies": {
-    "net.m127.vertexcolor.baker": "1.0.0"
+    "net.m127.vertexcolor.baker": "1.0.0",
+    "com.vrchat.base": "3.2.1"
   },
   "vpmDependencies": {
-    "net.m127.vertexcolor.baker": "1.x.x"
+    "net.m127.vertexcolor.baker": "1.x.x",
+    "com.vrchat.base": ">=3.2.1 <4"
   },
   "displayName": "Bounds Applier",
   "description": "Component to automatically apply bounds."

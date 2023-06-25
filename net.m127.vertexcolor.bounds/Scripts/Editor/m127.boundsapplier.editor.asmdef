@@ -1,7 +1,8 @@
 {
     "name": "m127.boundsapplier.editor",
     "references": [
-        "GUID:955d69cad2e8cf146b780bc740371847"
+        "GUID:955d69cad2e8cf146b780bc740371847",
+        "GUID:79ca36ed60c1b7046a6dc8eaabfd084c"
     ],
     "includePlatforms": [
         "Editor"
