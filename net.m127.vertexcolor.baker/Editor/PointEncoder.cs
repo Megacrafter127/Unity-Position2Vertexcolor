@@ -96,9 +96,9 @@ public class PointEncoder : EditorWindow
         {
             string path = AnimationUtility.CalculateTransformPath(r.transform, avatar.transform);
             Type type = r.GetType();
-            EditorCurveBinding bindingX = EditorCurveBinding.FloatCurve(path, type, bindingSelection + ".x");
-            EditorCurveBinding bindingY = EditorCurveBinding.FloatCurve(path, type, bindingSelection + ".y");
-            EditorCurveBinding bindingZ = EditorCurveBinding.FloatCurve(path, type, bindingSelection + ".z");
+            EditorCurveBinding bindingX = EditorCurveBinding.FloatCurve(path, type, $"material.{bindingSelection}.x");
+            EditorCurveBinding bindingY = EditorCurveBinding.FloatCurve(path, type, $"material.{bindingSelection}.y");
+            EditorCurveBinding bindingZ = EditorCurveBinding.FloatCurve(path, type, $"material.{bindingSelection}.z");
             AnimationCurve curveX = AnimationUtility.GetEditorCurve(clip, bindingX) ?? new AnimationCurve();
             AnimationCurve curveY = AnimationUtility.GetEditorCurve(clip, bindingY) ?? new AnimationCurve();
             AnimationCurve curveZ = AnimationUtility.GetEditorCurve(clip, bindingZ) ?? new AnimationCurve();
