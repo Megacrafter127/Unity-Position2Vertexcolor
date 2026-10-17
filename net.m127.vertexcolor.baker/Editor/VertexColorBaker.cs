@@ -47,20 +47,15 @@ namespace M127
 
         public void OnGUI()
         {
-            GameObject oldAvatar = avatar;
-            avatar = (GameObject)EditorGUILayout.ObjectField("Avatar", avatar, typeof(GameObject), true);
-            if (oldAvatar != avatar)
-            {
-                selection.Clear();
-                hasPbound = false;
-            }
-            if (avatar is null)
+            Avatar = (GameObject)EditorGUILayout.ObjectField("Avatar", Avatar, typeof(GameObject), true);
+            if (Avatar is null)
             {
                 EditorGUILayout.HelpBox("More Options will be listed once an object is selected.", MessageType.Info);
                 return;
             }
             bool hasMesh = false;
-            foreach (Renderer r in avatar.GetComponentsInChildren<Renderer>(true))
+            scroll = EditorGUILayout.BeginScrollView(scroll);
+            foreach (Renderer r in Renderers)
             {
                 if (r is MeshRenderer || r is SkinnedMeshRenderer)
                 {
@@ -71,6 +66,7 @@ namespace M127
                     else selection.Remove(r);
                 }
             }
+            EditorGUILayout.EndScrollView();
             if (!hasMesh) EditorGUILayout.HelpBox("Selected object does not contain any recognized meshes.", MessageType.Warning);
             EditorGUILayout.Separator();
             if (hasPbound)
@@ -95,14 +91,14 @@ namespace M127
             if (GUILayout.Button("Bake Vertex Colors")) bakeMeshes(overwrite);
             if (hasPbound)
             {
-                if (GUILayout.Button("")) transferBounds();
+                if (GUILayout.Button("Transfer Bounds")) TransferBounds();
             }
             else EditorGUILayout.HelpBox("Cannot transfer without baking first. If you have already baked, <b>BoundsApplier</b> components will be attached to each baked renderer", MessageType.Info);
         }
 
         public const string BB_MIN = "_BoundingBoxMin", BB_MAX = "_BoundingBoxMax";
 
-        public void transferBounds()
+        public void TransferBounds()
         {
             if (!hasPbound)
             {
@@ -115,12 +111,34 @@ namespace M127
             }
         }
 
-        public GameObject avatar;
+        private GameObject _avatar;
+
+        public GameObject Avatar {
+            get => _avatar;
+            set {
+                bool changed = _avatar != value;
+                _avatar = value;
+                if(changed) {
+                    ReloadAvatar();
+                }
+            }
+        }
+
+        private Renderer[] _renderers;
+
+        public Renderer[] Renderers => _renderers;
+
+        public void ReloadAvatar() {
+            _renderers = !Avatar ? Array.Empty<Renderer>() :Avatar.GetComponentsInChildren<Renderer>(true);
+            selection.Clear();
+            hasPbound = false;
+        }
 
         public readonly ISet<Renderer> selection = new HashSet<Renderer>();
 
         public Bounds pbound;
         public bool hasPbound;
+        public Vector2 scroll;
 
         public const string UNDO_NAME = "Vertex Color Baker";
 
@@ -129,7 +147,7 @@ namespace M127
             Queue<Vector3> positions = new Queue<Vector3>(1);
             Queue<Quaternion> rotations = new Queue<Quaternion>(1);
             Queue<Vector3> scales = new Queue<Vector3>(1);
-            for (Transform t = avatar.transform; t; t = t.parent)
+            for (Transform t = Avatar.transform; t; t = t.parent)
             {
                 positions.Enqueue(t.localPosition);
                 t.localPosition = Vector3.zero;
@@ -247,13 +265,13 @@ namespace M127
                 }
                 else EditorUtility.SetDirty(n);
             }
-            for (Transform t = avatar.transform; t; t = t.parent)
+            for (Transform t = Avatar.transform; t; t = t.parent)
             {
                 t.localPosition = positions.Dequeue();
                 t.localRotation = rotations.Dequeue();
                 t.localScale = scales.Dequeue();
             }
-            transferBounds();
+            TransferBounds();
         }
     }
 }
